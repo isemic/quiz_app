@@ -12,27 +12,64 @@
 
     <title>Django Quiz App</title>
 </head>
+<style>
+    .main {
+        color: #fff;
+        font-weight: bold;
+        font-size: 2.5rem;
+        padding: 20px;
+        background: linear-gradient(90deg, #007bff, #6a11cb);
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sub {
+        color: #007bff;
+        text-align: center;
+        font-size: 1.5rem;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+</style>
 <body>
 
 <div class="container mt-5 pt-5">
-    <!-- Added the Geeksforgeeks heading here -->
-    <h1 style="color: green; text-align: center;">Geeksforgeeks</h1>
+    <h1 class="main">Quiz Application</h1>
+    <h1 class="sub">Test yourself</h1>
 
     <div class="col-md-6 mx-auto">
-        <form action="">
+        <form id="quizForm">
             <div class="form-group">
-                <label for="">Select Types</label>
-                <select name="gfg" id="" class="form-control" value="gfg">
+                <label for="categorySelect">Select Type</label>
+                <select name="gfg" id="categorySelect" class="form-control">
                     <option value="Choose">Choose</option>
                     {% for type in catgories %}
                     <option value="{{type.gfg_name}}">{{type.gfg_name}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button class="btn btn-danger mt-3">Submit</button>
+            <div class="text-center">
+                <button type="button" class="btn btn-danger mt-3" onclick="validateForm()">Attempt quiz</button>
+            </div>
         </form>
     </div>
 </div>
+
+<script>
+    function validateForm() {
+        const categorySelect = document.getElementById('categorySelect');
+        if (categorySelect.value === "Choose") {
+            // Show popup if category is not selected
+            alert("Please select a category before attempting the quiz.");
+        } else {
+            // Submit form if category is selected
+            document.getElementById('quizForm').submit();
+        }
+    }
+</script>
 
 </body>
 </html>
